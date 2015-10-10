@@ -1,0 +1,30 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PokerTester", "PokerTester.vcproj", "{A2075542-ED8B-4DE2-A0E9-EA8F0CB8A4E3}"
+	ProjectSection(ProjectDependencies) = postProject
+		{6AF4ECA7-3BD8-479A-935F-85EFFEF061C8} = {6AF4ECA7-3BD8-479A-935F-85EFFEF061C8}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Poker", "..\Poker\Poker.vcproj", "{6AF4ECA7-3BD8-479A-935F-85EFFEF061C8}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{A2075542-ED8B-4DE2-A0E9-EA8F0CB8A4E3}.Debug.ActiveCfg = Debug|Win32
+		{A2075542-ED8B-4DE2-A0E9-EA8F0CB8A4E3}.Debug.Build.0 = Debug|Win32
+		{A2075542-ED8B-4DE2-A0E9-EA8F0CB8A4E3}.Release.ActiveCfg = Release|Win32
+		{A2075542-ED8B-4DE2-A0E9-EA8F0CB8A4E3}.Release.Build.0 = Release|Win32
+		{6AF4ECA7-3BD8-479A-935F-85EFFEF061C8}.Debug.ActiveCfg = Debug|Win32
+		{6AF4ECA7-3BD8-479A-935F-85EFFEF061C8}.Debug.Build.0 = Debug|Win32
+		{6AF4ECA7-3BD8-479A-935F-85EFFEF061C8}.Release.ActiveCfg = Release|Win32
+		{6AF4ECA7-3BD8-479A-935F-85EFFEF061C8}.Release.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal
