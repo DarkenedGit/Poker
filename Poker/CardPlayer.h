@@ -4,9 +4,6 @@
 // www.darkenedsoftware.com
 // Date: July 11, 2005
 
-#ifndef __CARDPLAYER_H__
-#define __CARDPLAYER_H__
-
 #include <string>
 
 #include "PokerDefines.h"
@@ -24,4 +21,3 @@ struct ICardPlayer
 	virtual bool CardsFaceUp(){return false;}
 };
 */
-#endif //__CARDPLAYER_H__

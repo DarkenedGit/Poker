@@ -4,6 +4,7 @@
 
 #include "StackDeck.h"
 
+using namespace Poker;
 using namespace Holdem;
 
 bool TestStackDeck()

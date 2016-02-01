@@ -7,81 +7,83 @@ using namespace std;
 
 #include "PokerDefines.h"
 
-
-bool RankSuitFromCard( Cards card, Ranks & rank, Suits & suit )
+namespace Poker
 {
-	assert( (card >= Cards::SpadeAce) && (card <= Cards::ClubTwo) );
-	rank = Ranks::Max;
-	suit = Suits::Max;
 
-	if( card <= Cards::SpadeTwo )
+	bool RankSuitFromCard(Cards card, Ranks & rank, Suits & suit)
 	{
-		suit = Suits::Spade;
-		rank = (Ranks) card;
+		assert((card >= Cards::SpadeAce) && (card <= Cards::ClubTwo));
+		rank = Ranks::Max;
+		suit = Suits::Max;
+
+		if (card <= Cards::SpadeTwo)
+		{
+			suit = Suits::Spade;
+			rank = (Ranks)card;
+		}
+		if (card <= Cards::HeartTwo && card >= Cards::HeartAce)
+		{
+			suit = Suits::Heart;
+			rank = (Ranks)((int)card - 13);
+		}
+		if (card <= Cards::DiamondTwo && card >= Cards::DiamondAce)
+		{
+			suit = Suits::Diamond;
+			rank = (Ranks)((int)card - 26);
+		}
+		if (card <= Cards::ClubTwo && card >= Cards::ClubAce)
+		{
+			suit = Suits::Club;
+			rank = (Ranks)((int)card - 39);
+		}
+		assert(suit != Suits::Max);
+		assert(rank != Ranks::Max);
+		return true;
 	}
-	if( card <= Cards::HeartTwo && card >= Cards::HeartAce )
+
+	bool RankFromCard(Cards card, Ranks & rank)
 	{
-		suit = Suits::Heart;
-		rank = (Ranks) ( (int) card - 13);
+		assert((card >= Cards::SpadeAce) && (card <= Cards::ClubTwo));
+		rank = Ranks::Max;
+
+		if (card <= Cards::SpadeTwo)
+		{
+			rank = (Ranks)card;
+		}
+		if (card <= Cards::HeartTwo && card >= Cards::HeartAce)
+		{
+			rank = (Ranks)((int)card - 13);
+		}
+		if (card <= Cards::DiamondTwo && card >= Cards::DiamondAce)
+		{
+			rank = (Ranks)((int)card - 26);
+		}
+		if (card <= Cards::ClubTwo && card >= Cards::ClubAce)
+		{
+			rank = (Ranks)((int)card - 39);
+		}
+		assert(rank != Ranks::Max);
+		return true;
 	}
-	if( card <= Cards::DiamondTwo && card >= Cards::DiamondAce )
+
+	bool CardFromRankSuit(Ranks rank, Suits suit, Cards & card)
 	{
-		suit = Suits::Diamond;
-		rank = (Ranks) ( (int) card - 26);
+		assert(rank >= Ranks::Ace && rank < Ranks::Max);
+		assert(suit >= Suits::Spade && suit < Suits::Max);
+		card = Cards::Max;
+		if (suit == Suits::Spade)
+			card = (Cards)rank;
+		if (suit == Suits::Heart)
+			card = (Cards)((int)rank + 13);
+		if (suit == Suits::Diamond)
+			card = (Cards)((int)rank + 26);
+		if (suit == Suits::Club)
+			card = (Cards)((int)rank + 39);
+		assert(card != Cards::Max);
+		return true;
 	}
-	if( card <= Cards::ClubTwo && card >= Cards::ClubAce )
-	{
-		suit = Suits::Club;
-		rank = (Ranks) ( (int) card - 39);
-	}
-	assert( suit != Suits::Max );
-	assert( rank != Ranks::Max );
-	return true;
+
 }
-
-bool RankFromCard( Cards card, Ranks & rank )
-{
-	assert( (card >= Cards::SpadeAce) && (card <= Cards::ClubTwo) );
-	rank = Ranks::Max;
-
-	if( card <= Cards::SpadeTwo )
-	{
-		rank = (Ranks) card;
-	}
-	if( card <= Cards::HeartTwo && card >= Cards::HeartAce )
-	{
-		rank = (Ranks) ( (int) card - 13);
-	}
-	if( card <= Cards::DiamondTwo && card >= Cards::DiamondAce )
-	{
-		rank = (Ranks) ( (int) card - 26);
-	}
-	if( card <= Cards::ClubTwo && card >= Cards::ClubAce )
-	{
-		rank = (Ranks) ( (int) card - 39);
-	}
-	assert( rank != Ranks::Max );
-	return true;
-}
-
-bool CardFromRankSuit( Ranks rank, Suits suit, Cards & card )
-{
-	assert( rank >= Ranks::Ace && rank < Ranks::Max );
-	assert( suit >= Suits::Spade && suit < Suits::Max );
-	card = Cards::Max;
-	if( suit == Suits::Spade )
-		card = (Cards) rank;
-	if( suit == Suits::Heart )
-		card = (Cards) ( (int) rank + 13);
-	if( suit == Suits::Diamond )
-		card = (Cards) ( (int) rank + 26);
-	if( suit == Suits::Club )
-		card = (Cards) ( (int) rank + 39);
-	assert(card != Cards::Max);
-	return true;
-}
-
-
 
 
 /*

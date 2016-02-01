@@ -16,6 +16,7 @@ using namespace std;
 #include "StackDeck.h"
 #include "Counters.h"
 
+using namespace Poker;
 using namespace Holdem;
 
 bool AllStartingHandsVSAllStartingHands5000000()

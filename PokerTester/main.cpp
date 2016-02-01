@@ -5,12 +5,14 @@
 #include <iostream>
 #include <thread>
 using namespace std;
+
+#include "Deck.h"
+
 #include "TestDeck.h"
 #include "TestPokerHands.h"
 #include "TestCounters.h"
 #include "TestStackDeck.h"
 
-#include "Deck.h"
 /*
 Rand()
 Loops: 100000 Standard Dev:  0.0388527

@@ -1,5 +1,4 @@
-#ifndef __LOGGER_H__
-#define __LOGGER_H__
+#pragma once
 
 #include <fstream>
 #include <ostream>
@@ -40,5 +39,3 @@ struct LoggerManager
 	bool DeInit();
 	bool SetStream( LogDest log );
 };
-
-#endif //__LOGGER_H__

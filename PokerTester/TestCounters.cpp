@@ -2,6 +2,7 @@
 // www.darkenedsoftware.com
 // Date: Feb 22, 2013
 #include "Counters.h"
+using namespace Poker;
 
 bool TestCounters()
 {

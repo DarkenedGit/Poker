@@ -12,84 +12,84 @@ using namespace std;
 
 namespace Holdem
 {
+	using namespace Poker;
 
-RoundsResults::RoundsResults()
-{
-	mRoundsWon	=	0;
-	mRoundsLost =	0;
-	mRoundsTied =	0;
-	mNumRounds	=	0;
-}
-
-bool RoundsResults::AddRound( Status result )
-{
-	++mNumRounds;
-	switch(result)
+	RoundsResults::RoundsResults()
 	{
-		case Status::Win:
-			++mRoundsWon;
-			break;
-		case Status::Loss:
-			++mRoundsLost;
-			break;
-		case Status::Tie:
-			++mRoundsTied;
-			break;
-		default:
-			assert(0);
-			break;
+		mRoundsWon	=	0;
+		mRoundsLost =	0;
+		mRoundsTied =	0;
+		mNumRounds	=	0;
 	}
-	return true;
-}
 
-bool StartingHandVSStartingHandStat::AddRound( const HoldemRound & round  )
-{
-	if( round.DidHandWin( 0 ) )
+	bool RoundsResults::AddRound( Status result )
 	{
-		mResults.AddRound( Status::Win );
+		++mNumRounds;
+		switch(result)
+		{
+			case Status::Win:
+				++mRoundsWon;
+				break;
+			case Status::Loss:
+				++mRoundsLost;
+				break;
+			case Status::Tie:
+				++mRoundsTied;
+				break;
+			default:
+				assert(0);
+				break;
+		}
+		return true;
 	}
-	else
+
+	bool StartingHandVSStartingHandStat::AddRound( const HoldemRound & round  )
 	{
-		if( round.DidHandTie( 0 ) )
-			mResults.AddRound( Status::Tie );
+		if( round.DidHandWin( 0 ) )
+		{
+			mResults.AddRound( Status::Win );
+		}
 		else
-			mResults.AddRound( Status::Loss );
+		{
+			if( round.DidHandTie( 0 ) )
+				mResults.AddRound( Status::Tie );
+			else
+				mResults.AddRound( Status::Loss );
+		}
+		return true;
 	}
-	return true;
-}
 
-StartingHandVSStartingHandStat::StartingHandVSStartingHandStat()
-{
-	mStartingHand = StartingHands::Max;
-	mSuited = false;
-	mStartingHandVS = StartingHands::Max;
-	mSuitedVS = false;
-}
-
-
-StartingHandVSNumOtherHandsStat::StartingHandVSNumOtherHandsStat()
-{
-	mStartingHand = StartingHands::Max;
-	mSuited = false;
-	mNumApponents = 0;
-};
-
-bool StartingHandVSNumOtherHandsStat::AddRound( const HoldemRound & round  )
-{
-	if( round.DidHandWin( 0 ) )
+	StartingHandVSStartingHandStat::StartingHandVSStartingHandStat()
 	{
-		mResults.AddRound( Status::Win );
+		mStartingHand = StartingHands::Max;
+		mSuited = false;
+		mStartingHandVS = StartingHands::Max;
+		mSuitedVS = false;
 	}
-	else
+
+
+	StartingHandVSNumOtherHandsStat::StartingHandVSNumOtherHandsStat()
 	{
-		if( round.DidHandTie( 0 ) )
-			mResults.AddRound( Status::Tie );
+		mStartingHand = StartingHands::Max;
+		mSuited = false;
+		mNumApponents = 0;
+	};
+
+	bool StartingHandVSNumOtherHandsStat::AddRound( const HoldemRound & round  )
+	{
+		if( round.DidHandWin( 0 ) )
+		{
+			mResults.AddRound( Status::Win );
+		}
 		else
-			mResults.AddRound( Status::Loss );
+		{
+			if( round.DidHandTie( 0 ) )
+				mResults.AddRound( Status::Tie );
+			else
+				mResults.AddRound( Status::Loss );
+		}
+		return true;
 	}
-	return true;
-}
-
 
 }//End namespace Holdem
 

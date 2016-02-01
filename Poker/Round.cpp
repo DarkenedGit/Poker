@@ -11,81 +11,85 @@ using namespace std;
 #include "Round.h"
 #include "Counters.h"
 
-
-bool Round::ClearHands()
+namespace Poker
 {
-	for( PokerHand & hand : mHands )
+
+	bool Round::ClearHands()
 	{
-		hand.mHandRank = HandRank::HighCard;
-	}
-	return true;
-}
-
-bool Round::DidHandWin( int handIdx ) const
-{
-	// Any thing else is a not a real win, either lose or tie
-	if( nNumWinners == 1  && handIdx == mIdxWinners[0] )
-			return true;
-	return false;
-}
-
-bool Round::DidHandLose( int handIdx ) const
-{
-	if( DidHandWin( handIdx ) == true)
-		return false;
-	if( DidHandTie( handIdx) == true )
-		return false;
-	return true;
-}
-
-bool Round::DidHandTie( int handIdx ) const
-{
-	if( nNumWinners == 1 )
-		return false;
-	for( int loop(0); loop != nNumWinners; ++loop )
-	{
-		if( mIdxWinners[loop] == handIdx )
-			return true;
-	}
-	return false;
-}
-
-bool Round::DetermineBestHands()
-{
-	nNumWinners = 1;
-	mIdxWinners[0] = 0;
-	PokerHand * highestHand = &mHands[0];
-
-	for( int playerLoop(1); playerLoop != mNumPlayers; ++playerLoop )
-	{
-		if( mHands[playerLoop] == *highestHand )
-		{	// Now we need to determine if the two hands are greater or now
-			mIdxWinners[nNumWinners] = playerLoop;
-			++nNumWinners;
-		}
-		if( mHands[playerLoop] > *highestHand )
+		for (PokerHand & hand : mHands)
 		{
-			nNumWinners = 1;
-			mIdxWinners[0] = playerLoop;
-			highestHand = &(mHands[playerLoop]);
+			hand.mHandRank = HandRank::HighCard;
 		}
+		return true;
 	}
-	return true;
-}
 
-bool Round::Winner()
-{
-	// We take each each hand add it to the board and determine from the top down what the best hand it has
-	// First determine high card, pair, twoPair, set, full house, quads
-	ClearHands();
-	DetermineHighCardToQuads();
-	DetermineStraights();
-	DetermineFlush();
-//	cout<<"\n";
-	// Determine who has the best hand
-	DetermineBestHands();
-	return true;
-}
+	bool Round::DidHandWin(int handIdx) const
+	{
+		// Any thing else is a not a real win, either lose or tie
+		if (nNumWinners == 1 && handIdx == mIdxWinners[0])
+			return true;
+		return false;
+	}
+
+	bool Round::DidHandLose(int handIdx) const
+	{
+		if (DidHandWin(handIdx) == true)
+			return false;
+		if (DidHandTie(handIdx) == true)
+			return false;
+		return true;
+	}
+
+	bool Round::DidHandTie(int handIdx) const
+	{
+		if (nNumWinners == 1)
+			return false;
+		for (int loop(0); loop != nNumWinners; ++loop)
+		{
+			if (mIdxWinners[loop] == handIdx)
+				return true;
+		}
+		return false;
+	}
+
+	bool Round::DetermineBestHands()
+	{
+		nNumWinners = 1;
+		mIdxWinners[0] = 0;
+		PokerHand * highestHand = &mHands[0];
+
+		for (int playerLoop(1); playerLoop != mNumPlayers; ++playerLoop)
+		{
+			if (mHands[playerLoop] == *highestHand)
+			{	// Now we need to determine if the two hands are greater or now
+				mIdxWinners[nNumWinners] = playerLoop;
+				++nNumWinners;
+			}
+			if (mHands[playerLoop] > *highestHand)
+			{
+				nNumWinners = 1;
+				mIdxWinners[0] = playerLoop;
+				highestHand = &(mHands[playerLoop]);
+			}
+		}
+		return true;
+	}
+
+	bool Round::Winner()
+	{
+		// We take each each hand add it to the board and determine from the top down what the best hand it has
+		// First determine high card, pair, twoPair, set, full house, quads
+		ClearHands();
+		DetermineHighCardToQuads();
+		DetermineStraights();
+		DetermineFlush();
+		//	cout<<"\n";
+		// Determine who has the best hand
+		DetermineBestHands();
+		return true;
+	}
+
+}	//END OF NAMESPACE POKER
 /*
 bool Round::DetermineGameState()
 {

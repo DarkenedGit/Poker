@@ -5,6 +5,8 @@
 #include <assert.h>
 #include "PokerHand.h"
 
+using namespace Poker;
+
 bool TestHighHand()
 {
 	// Lets make some high hands to work with;

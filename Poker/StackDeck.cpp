@@ -7,74 +7,76 @@
 
 namespace Holdem
 {
+	using namespace Poker;
 
-StartingHandsSet::StartingHandsSet()
-{
-	for(StartingHands hand : mHands )
+	StartingHandsSet::StartingHandsSet()
 	{
-		hand = StartingHands::Max;
-	}
-	for( HoleCardSuits suit : mSuits )
-	{
-		suit.mPocket[0] = Suits::Max;
-		suit.mPocket[1] = Suits::Max;
-	}
-	mNum = 0;
-}
-
-bool StartingHandsSet::CheckHand( const StartingHands & theHand, const HoleCardSuits & suit )
-{
-	// Check that it is not already there.
-	for( unsigned int loop(0); loop != mNum; ++loop )
-	{
-		if( mHands[loop] == theHand && mSuits[loop] == suit )
-		{	// Trying to add the same hand, shame on you.
-			return false;
+		for(StartingHands hand : mHands )
+		{
+			hand = StartingHands::Max;
 		}
+		for( HoleCardSuits suit : mSuits )
+		{
+			suit.mPocket[0] = Suits::Max;
+			suit.mPocket[1] = Suits::Max;
+		}
+		mNum = 0;
 	}
-	return true;
-}
 
-bool StartingHandsSet::AddHand( const StartingHands & theHand, const HoleCardSuits & suit )
-{
-	bool result = false;
-	if( CheckHand( theHand, suit ) )
+	bool StartingHandsSet::CheckHand( const StartingHands & theHand, const HoleCardSuits & suit )
 	{
-		mHands[mNum] = theHand;
-		mSuits[mNum] = suit;
-		++mNum;
-		result = true;
+		// Check that it is not already there.
+		for( unsigned int loop(0); loop != mNum; ++loop )
+		{
+			if( mHands[loop] == theHand && mSuits[loop] == suit )
+			{	// Trying to add the same hand, shame on you.
+				return false;
+			}
+		}
+		return true;
 	}
-	return result;
-}
 
-bool StackTheDeck( Deck & theDeck, StartingHandsSet & theStartingHands )
-{
-	// Figure out what cards he needs to have, put them in place and then reshuffle the rest of the deck
-	HoleCards cards;
-	CardsFromStartingHand( theStartingHands.mHands[0], theStartingHands.mSuits[0], cards );
-	// Re-arrange the cards in the deck so the player will get these cards
-	int cardIndex;
-	theDeck.GetCardIdx( cardIndex, cards.mPocket[0] );
-	theDeck.SwapCards( 0, cardIndex );
+	bool StartingHandsSet::AddHand( const StartingHands & theHand, const HoleCardSuits & suit )
+	{
+		bool result = false;
+		if( CheckHand( theHand, suit ) )
+		{
+			mHands[mNum] = theHand;
+			mSuits[mNum] = suit;
+			++mNum;
+			result = true;
+		}
+		return result;
+	}
 
-	theDeck.GetCardIdx( cardIndex, cards.mPocket[1] );
-	theDeck.SwapCards( 1, cardIndex );
+	bool StackTheDeck( Deck & theDeck, StartingHandsSet & theStartingHands )
+	{
+		// Figure out what cards he needs to have, put them in place and then reshuffle the rest of the deck
+		HoleCards cards;
+		CardsFromStartingHand( theStartingHands.mHands[0], theStartingHands.mSuits[0], cards );
+		// Re-arrange the cards in the deck so the player will get these cards
+		int cardIndex;
+		theDeck.GetCardIdx( cardIndex, cards.mPocket[0] );
+		theDeck.SwapCards( 0, cardIndex );
 
-	CardsFromStartingHand( theStartingHands.mHands[1], theStartingHands.mSuits[1], cards );
-	// Re-arrange the cards in the deck so the player will get these cards
-	theDeck.GetCardIdx( cardIndex, cards.mPocket[0] );
-	theDeck.SwapCards( 2, cardIndex );
+		theDeck.GetCardIdx( cardIndex, cards.mPocket[1] );
+		theDeck.SwapCards( 1, cardIndex );
 
-	theDeck.GetCardIdx( cardIndex, cards.mPocket[1] );
-	theDeck.SwapCards( 3, cardIndex );
+		CardsFromStartingHand( theStartingHands.mHands[1], theStartingHands.mSuits[1], cards );
+		// Re-arrange the cards in the deck so the player will get these cards
+		theDeck.GetCardIdx( cardIndex, cards.mPocket[0] );
+		theDeck.SwapCards( 2, cardIndex );
 
-	theDeck.ShuffleStackedDeck(4);
+		theDeck.GetCardIdx( cardIndex, cards.mPocket[1] );
+		theDeck.SwapCards( 3, cardIndex );
 
-	return true;
-}
+		theDeck.ShuffleStackedDeck(4);
+
+		return true;
+	}
 
 } // End of namespace Holdem
+
 /*
 bool StackTheDeck( Deck & theDeck, OmahaStartingHandsSet & theStartingHands )
 {

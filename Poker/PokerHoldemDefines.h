@@ -4,63 +4,57 @@
 // www.darkenedsoftware.com
 // Date: June 4, 2008
 
-#ifndef __POKERHOLDEMDEFINES_H__
-#define __POKERHOLDEMDEFINES_H__
-
 #include "PokerDefines.h"
-
-// Stages of game
 
 namespace Holdem
 {
 
-enum StartingHands{	AceAce, AceKing, AceQueen, AceJack, AceTen, AceNine, AceEight, AceSeven, AceSix, AceFive, AceFour, AceThree, AceTwo,
-							KingKing, KingQueen, KingJack, KingTen, KingNine, KingEight, KingSeven, KingSix, KingFive, KingFour, KingThree, KingTwo,
-							QueenQueen, QueenJack, QueenTen, QueenNine, QueenEight, QueenSeven, QueenSix, QueenFive, QueenFour, QueenThree, QueenTwo,
-							JackJack, JackTen, JackNine, JackEight, JackSeven, JackSix, JackFive, JackFour, JackThree, JackTwo,
-							TenTen, TenNine, TenEight, TenSeven, TenSix, TenFive, TenFour, TenThree, TenTwo,
-							NineNine, NineEight, NineSeven, NineSix, NineFive, NineFour, NineThree, NineTwo, 
-							EightEight, EightSeven, EightSix, EightFive, EightFour, EightThree, EigthTwo,
-							SevenSeven, SevenSix, SevenFive, SevenFour, SevenThree, SevenTwo,
-							SixSix, SixFive, SixFour, SixThree, SixTwo,
-							FiveFive, FiveFour, FiveThree, FiveTwo,
-							FourFour, FourThree, FourTwo, 
-							ThreeThree, ThreeTwo,
-							TwoTwo,
-							Max 
-					};
+	enum class StartingHands{	AceAce, AceKing, AceQueen, AceJack, AceTen, AceNine, AceEight, AceSeven, AceSix, AceFive, AceFour, AceThree, AceTwo,
+								KingKing, KingQueen, KingJack, KingTen, KingNine, KingEight, KingSeven, KingSix, KingFive, KingFour, KingThree, KingTwo,
+								QueenQueen, QueenJack, QueenTen, QueenNine, QueenEight, QueenSeven, QueenSix, QueenFive, QueenFour, QueenThree, QueenTwo,
+								JackJack, JackTen, JackNine, JackEight, JackSeven, JackSix, JackFive, JackFour, JackThree, JackTwo,
+								TenTen, TenNine, TenEight, TenSeven, TenSix, TenFive, TenFour, TenThree, TenTwo,
+								NineNine, NineEight, NineSeven, NineSix, NineFive, NineFour, NineThree, NineTwo, 
+								EightEight, EightSeven, EightSix, EightFive, EightFour, EightThree, EigthTwo,
+								SevenSeven, SevenSix, SevenFive, SevenFour, SevenThree, SevenTwo,
+								SixSix, SixFive, SixFour, SixThree, SixTwo,
+								FiveFive, FiveFour, FiveThree, FiveTwo,
+								FourFour, FourThree, FourTwo, 
+								ThreeThree, ThreeTwo,
+								TwoTwo,
+								Max 
+						};
 
-bool IsPair( StartingHands hand );
+	bool IsPair( StartingHands hand );
 
+	template < typename type > class Pocket
+	{
+	public:
+		type mPocket[2];
+		bool operator==( const Pocket & pocket );
+		Pocket(){mPocket[0] = type::Max; mPocket[1] = type::Max;}
+	};
 
+	template <typename type > bool Pocket<type>::operator==( const Pocket & pocket )
+	{
+		assert(mPocket[0] != type::Max);
+		assert(mPocket[1] != type::Max);
+		assert(pocket.mPocket[0] != type::Max);
+		assert(pocket.mPocket[1] != type::Max);
 
-template < typename type > class Pocket
-{
-public:
-	type mPocket[2];
-	bool operator==( const Pocket & pocket );
-	Pocket(){mPocket[0] = type::Max; mPocket[1] = type::Max;}
-};
+		if(  mPocket[0] == pocket.mPocket[0] && mPocket[1] == pocket.mPocket[1])
+			return true;
+		return false;
+	}
 
-template <typename type > bool Pocket<type>::operator==( const Pocket & pocket )
-{
-	assert(mPocket[0] != type::Max);
-	assert(mPocket[1] != type::Max);
-	assert(pocket.mPocket[0] != type::Max);
-	assert(pocket.mPocket[1] != type::Max);
+	typedef Pocket<Poker::Cards> HoleCards;
+	typedef Pocket<Poker::Ranks> HoleCardRanks;
+	typedef Pocket<Poker::Suits> HoleCardSuits;
 
-	if(  mPocket[0] == pocket.mPocket[0] && mPocket[1] == pocket.mPocket[1])
-		return true;
-	return false;
-}
+	bool StartingHandFromCards( const HoleCards & pocket, StartingHands & startingHand, bool & IsSuited );
+	bool CardsFromStartingHand( const StartingHands hand, const HoleCardSuits & suits, HoleCards & pocket );
+	bool RanksFromStartingHand( const StartingHands hand, HoleCardRanks & ranks );
 
-typedef Pocket<Cards> HoleCards;
-typedef Pocket<Ranks> HoleCardRanks;
-typedef Pocket<Suits> HoleCardSuits;
-
-bool StartingHandFromCards( const HoleCards & pocket, StartingHands & startingHand, bool & IsSuited );
-bool CardsFromStartingHand( const StartingHands hand, const HoleCardSuits & suits, HoleCards & pocket );
-bool RanksFromStartingHand( const StartingHands hand, HoleCardRanks & ranks );
 //StartingHands RandStartingHand();
 
 //int  MapStageToNumCardsOnBoard( HoldemStages stage );
@@ -83,5 +77,3 @@ struct GameState
 */
 
 } // End of namespace Holdem
-
-#endif // __POKERHOLDEMDEFINES_H__

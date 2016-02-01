@@ -4,39 +4,41 @@
 // www.darkenedsoftware.com
 // Date: Jan 19, 2005
 
-#ifndef __POKERDEFINES_H__
-#define __POKERDEFINES_H__
-
 #include <iosfwd>
 #include <cassert>
 #include <string>
 
-enum class Ranks { Ace, King, Queen, Jack, Ten, Nine, Eight, Seven, Six, Five, Four, Three, Two, Max };
+namespace Poker
+{
 
-enum class Suits { Spade, Heart, Diamond, Club, Max };
+	enum class Ranks		{ Ace, King, Queen, Jack, Ten, Nine, Eight, Seven, Six, Five, Four, Three, Two, Max };
 
-enum class Cards {	SpadeAce, SpadeKing, SpadeQueen, SpadeJake, SpadeTen, SpadeNine, SpadeEight,
-					SpadeSeven, SpadeSix, SpadeFive, SpadeFour, SpadeThree, SpadeTwo,
-					HeartAce, HeartKing, HeartQueen, HeartJake, HeartTen, HeartNine, HeartEight,
-					HeartSeven, HeartSix, HeartFive, HeartFour, HeartThree, HeartTwo,			
-					DiamondAce, DiamondKing, DiamondQueen, DiamondJake, DiamondTen, DiamondNine, DiamondEight,
-					DiamondSeven, DiamondSix, DiamondFive, DiamondFour, DiamondThree, DiamondTwo,			
-					ClubAce, ClubKing, ClubQueen, ClubJake, ClubTen, ClubNine, ClubEight,
-					ClubSeven, ClubSix, ClubFive, ClubFour, ClubThree, ClubTwo, Max };
+	enum class Suits		{ Spade, Heart, Diamond, Club, Max };
 
-enum class HandRank{ HighCard, Pair, TwoPair, Trips, Straight, Flush, FullHouse, 
-			Quads, StraightFlush, RoyalFlush, Max };
+	enum class Cards		{	SpadeAce, SpadeKing, SpadeQueen, SpadeJake, SpadeTen, SpadeNine, SpadeEight,
+								SpadeSeven, SpadeSix, SpadeFive, SpadeFour, SpadeThree, SpadeTwo,
+								HeartAce, HeartKing, HeartQueen, HeartJake, HeartTen, HeartNine, HeartEight,
+								HeartSeven, HeartSix, HeartFive, HeartFour, HeartThree, HeartTwo,			
+								DiamondAce, DiamondKing, DiamondQueen, DiamondJake, DiamondTen, DiamondNine, DiamondEight,
+								DiamondSeven, DiamondSix, DiamondFive, DiamondFour, DiamondThree, DiamondTwo,			
+								ClubAce, ClubKing, ClubQueen, ClubJake, ClubTen, ClubNine, ClubEight,
+								ClubSeven, ClubSix, ClubFive, ClubFour, ClubThree, ClubTwo, Max 
+							};
 
-// This is there because it is the same for all holdem type games
-enum class HoldemStages { PreFlop, Flop, Turn, River, Max };
+	enum class HandRank		{ HighCard, Pair, TwoPair, Trips, Straight, Flush, FullHouse, Quads, StraightFlush, RoyalFlush, Max };
 
-enum class MaxPlayers { Stud = 8, Holdem = 12};
+	// This is there because it is the same for all holdem type games
+	enum class HoldemStages { PreFlop, Flop, Turn, River, Max };
 
-enum class Status { Win, Loss, Tie, Max };
+	enum class MaxPlayers	{ Stud = 8, Holdem = 12};
 
-bool RankFromCard( Cards card, Ranks & rank );
-bool RankSuitFromCard( Cards card, Ranks & rank, Suits & suit );
-bool CardFromRankSuit( Ranks rank, Suits suit, Cards & card );
+	enum class Status		{ Win, Loss, Tie, Max };
+
+	bool RankFromCard( Cards card, Ranks & rank );
+	bool RankSuitFromCard( Cards card, Ranks & rank, Suits & suit );
+	bool CardFromRankSuit( Ranks rank, Suits suit, Cards & card );
+
+}  //END NAMESPACE POKER
 
 /*
 enum BetAction { BA_Raise, BA_ReRaise, BA_Fold, BA_Call, BA_Check, BA_ForcedBlind, BA_Max };
@@ -53,5 +55,3 @@ struct BetInfo
 	RelativePosition	mRealitivePos;
 };
 */
-
-#endif //__POKERDEFINES_H__

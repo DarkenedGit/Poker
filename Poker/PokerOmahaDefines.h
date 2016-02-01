@@ -4,9 +4,6 @@
 // www.darkenedsoftware.com
 // Date: June 4, 2008
 
-#ifndef __POKEROMAHADEFINES_H__
-#define __POKEROMAHADEFINES_H__
-
 #include "PokerDefines.h"
 
 namespace Omaha
@@ -491,14 +488,11 @@ template <typename type > bool Pocket<type>::operator==( const Pocket & pocket )
 	return false;
 }
 
-typedef Pocket<Cards> HoleCards;
-typedef Pocket<Ranks> HoleCardRanks;
-typedef Pocket<Suits> HoleCardSuits;
+typedef Pocket<Poker::Cards> HoleCards;
+typedef Pocket<Poker::Ranks> HoleCardRanks;
+typedef Pocket<Poker::Suits> HoleCardSuits;
 
 bool RanksFromStartingHand( StartingHands hand, HoleCardRanks ranks );
 bool CardsFromStartingHand( StartingHands hand, HoleCards & cards );
 
 } // End of namespace Omaha
-
-#endif // __POKEROMAHADEFINES_H__
-

@@ -5,6 +5,8 @@
 using namespace std;
 
 #include "Deck.h"
+using namespace Poker;
+
 
 bool TestDeck()
 {
