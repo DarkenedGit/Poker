@@ -38,6 +38,7 @@ namespace Holdem
 				break;
 			default:
 				assert(0);
+				return false;
 				break;
 		}
 		return true;

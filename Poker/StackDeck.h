@@ -13,13 +13,14 @@ namespace Holdem
 {
 
 	struct StartingHandsSet
-	{	// Max 12 players
+	{
+		std::array<StartingHands, (int)Poker::MaxPlayers::Holdem>	mHands;
+		std::array<HoleCardSuits, (int)Poker::MaxPlayers::Holdem>	mSuits;
+		unsigned int												mNum;
+		// Max 12 players
 		StartingHandsSet();
 		bool AddHand( const StartingHands & theHand, const HoleCardSuits & suit );
-			bool CheckHand( const StartingHands & theHand, const HoleCardSuits & suit );
-			std::array<StartingHands, (int)Poker::MaxPlayers::Holdem>	mHands;
-			std::array<HoleCardSuits, (int)Poker::MaxPlayers::Holdem>	mSuits;
-		unsigned int										mNum;
+		bool CheckHand( const StartingHands & theHand, const HoleCardSuits & suit );
 	};
 
 	bool StackTheDeck(Poker::Deck & theDeck, StartingHandsSet & theStartingHands);

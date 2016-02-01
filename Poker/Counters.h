@@ -4,6 +4,8 @@
 // www.darkenedsoftware.com
 // Date: Feb 4, 2005
 
+#include <array>
+
 #include "PokerDefines.h"
 
 namespace Poker
@@ -13,7 +15,7 @@ namespace Poker
 	{
 	public:
 		CardType			mCardType;	// What rank of card is being repeated.
-		int					mIndexs[7];	// What indexs within the 7 possible cards.
+		std::array<int, 7>	mIndexs;	// What indexs within the 7 possible cards.
 		int					mRepeat;	// How many times we have seen it
 
 		Repeated();
@@ -21,8 +23,8 @@ namespace Poker
 		int NumHoldCards();
 	};
 
-	typedef Repeated< Ranks> RepeatedRank;
-	typedef Repeated< Suits> RepeatedSuit;
+	using RepeatedRank = Repeated< Ranks>;
+	using RepeatedSuit = Repeated< Suits>;
 
 	bool DisplayRepeatedRank(RepeatedRank & repeats);
 	//bool DisplayRepeatedSuit( RepeatedSuit & repeats );

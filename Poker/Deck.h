@@ -4,8 +4,9 @@
 // www.darkenedsoftware.com
 // Date: Jan 19, 2005
 
-#include "PokerDefines.h"
 #include <array>
+
+#include "PokerDefines.h"
 
 namespace Poker
 {

@@ -47,13 +47,18 @@ namespace Holdem
 		return false;
 	}
 
-	typedef Pocket<Poker::Cards> HoleCards;
-	typedef Pocket<Poker::Ranks> HoleCardRanks;
-	typedef Pocket<Poker::Suits> HoleCardSuits;
+	using HoleCards = Pocket<Poker::Cards>;
+	using HoleCardRanks = Pocket<Poker::Ranks>;
+	using HoleCardSuits = Pocket<Poker::Suits>;
 
 	bool StartingHandFromCards( const HoleCards & pocket, StartingHands & startingHand, bool & IsSuited );
 	bool CardsFromStartingHand( const StartingHands hand, const HoleCardSuits & suits, HoleCards & pocket );
 	bool RanksFromStartingHand( const StartingHands hand, HoleCardRanks & ranks );
+
+} // End of namespace Holdem
+
+
+
 
 //StartingHands RandStartingHand();
 
@@ -62,18 +67,16 @@ namespace Holdem
 /*
 struct GameState
 {
-	HoldemStages	mStage;
-	BetAction		mAction;
-	float			mBetAmount;		// Current bet amount
-	float			mCallAmount;	// Current amount player would have to put in to call, ie bet amount sub last amount they put in
-	float			mSmallBlind;
-	float			mLargeBlind;
-	// Number of active people in the pot
-	int				mActiveInPot;
-	int				mNumActiveToRight;
-	int				mNumActiveToLeft;
-	std::vector<BetInfo>	mBettingHistory;
+HoldemStages	mStage;
+BetAction		mAction;
+float			mBetAmount;		// Current bet amount
+float			mCallAmount;	// Current amount player would have to put in to call, ie bet amount sub last amount they put in
+float			mSmallBlind;
+float			mLargeBlind;
+// Number of active people in the pot
+int				mActiveInPot;
+int				mNumActiveToRight;
+int				mNumActiveToLeft;
+std::vector<BetInfo>	mBettingHistory;
 };
 */
-
-} // End of namespace Holdem

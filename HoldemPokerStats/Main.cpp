@@ -27,6 +27,7 @@ bool AllStartingHandsVSAllStartingHands5000000()
 	if(!file)
 	{
 		assert(0);
+		return false;
 	}
 
 	for( unsigned int HandLoop(0); HandLoop != (unsigned int) StartingHands::Max; ++HandLoop )
@@ -103,6 +104,7 @@ bool TwoPlayersAllHandsVSRandomHands5000000()
 	if( !file )
 	{
 		assert(0);
+		return false;
 	}
 
 	for( unsigned int HandLoop(0); HandLoop != (unsigned int) StartingHands::Max; ++HandLoop )
@@ -164,6 +166,7 @@ bool ThreePlayersAllHandsVSRandomHands5000000()
 	if( !file )
 	{
 		assert(0);
+		return false;
 	}
 
 	for( unsigned int HandLoop(0); HandLoop != (unsigned int) StartingHands::Max; ++HandLoop )

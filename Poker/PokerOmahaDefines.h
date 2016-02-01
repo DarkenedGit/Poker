@@ -488,9 +488,9 @@ template <typename type > bool Pocket<type>::operator==( const Pocket & pocket )
 	return false;
 }
 
-typedef Pocket<Poker::Cards> HoleCards;
-typedef Pocket<Poker::Ranks> HoleCardRanks;
-typedef Pocket<Poker::Suits> HoleCardSuits;
+using HoleCards = Pocket<Poker::Cards>;
+using HoleCardRanks = Pocket<Poker::Ranks>;
+using HoleCardSuits = Pocket<Poker::Suits>;
 
 bool RanksFromStartingHand( StartingHands hand, HoleCardRanks ranks );
 bool CardsFromStartingHand( StartingHands hand, HoleCards & cards );
